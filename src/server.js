@@ -33,6 +33,7 @@ app.use((err, _req, res, _next) => {
     error: {
       status: err.status || httpStatus.INTERNAL_SERVER_ERROR,
       message: err.message,
+      ...Constants.env === 'development' && { stack: err.stack },
     },
   });
 });
