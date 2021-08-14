@@ -26,13 +26,16 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
+// eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
-  res.status(err.status || httpStatus.INTERNAL_SERVER_ERROR);
+  const status = err.status || (err.message && err.message.status) || httpStatus.INTERNAL_SERVER_ERROR;
 
+  res.status(status);
   res.send({
     error: {
-      status: err.status || httpStatus.INTERNAL_SERVER_ERROR,
+      status,
       message: err.message,
+      stack: err.stack,
     },
   });
 });
