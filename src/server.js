@@ -35,7 +35,7 @@ app.use((err, _req, res, _next) => {
     error: {
       status,
       message: err.message,
-      stack: err.stack,
+      ...Constants.env === 'development' && { stack: err.stack },
     },
   });
 });

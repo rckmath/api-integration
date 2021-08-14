@@ -5,9 +5,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js --ignore-path .gitignore .",
-    "dev": "nodemon -r dotenv/config app.js"
+    "dev": "cp .env.development .env & nodemon -r dotenv/config app.js",
+    "start": "cp .env.production .env & node -r dotenv/config app.js",
+    "docker": "docker build -t api-integration . & docker run -dp 3000:3000 --name pipebling api-integration",
+    "docker:stop": "docker stop pipebling",
+    "docker:restart": "npm run docker:stop & docker start pipebling"
   },
   "repository": {
     "type": "git",
