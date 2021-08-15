@@ -15,13 +15,13 @@ export function initInstance(baseURL, gateway) {
     (response) => response.data,
     (err) => Promise.reject(new ExtendableError('requestError', {
       gateway,
+      message: err.message,
       url: err.config && err.config.url,
+      data: err.config && err.config.data,
       method: err.config && err.config.method,
       headers: err.config && err.config.headers,
-      data: err.config && err.config.data,
-      response: err.response && err.response.data,
       status: err.response && err.response.status,
-      message: err.message,
+      response: err.response && err.response.data,
     })),
   );
 

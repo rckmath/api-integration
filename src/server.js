@@ -28,7 +28,9 @@ app.use((_req, _res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
-  const status = err.status || (err.message && err.message.status) || httpStatus.INTERNAL_SERVER_ERROR;
+  const status = err.status
+    || (err.message && err.message.status)
+    || httpStatus.INTERNAL_SERVER_ERROR;
 
   res.status(status);
   res.send({
