@@ -17,6 +17,7 @@ export default class Constants {
   static bling = {
     apiKey: process.env.BLING_API_KEY,
     baseUrl: process.env.BLING_BASE_URL,
+    defaultProductCode: process.env.BLING_MOCK_PRODUCT_CODE,
   }
 
   static pipedrive = {

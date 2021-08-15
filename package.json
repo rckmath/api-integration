@@ -32,7 +32,8 @@
     "http-status": "^1.5.0",
     "mongodb": "^4.1.0",
     "mongoose": "^5.13.7",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
     "@types/compression": "^1.7.1",
