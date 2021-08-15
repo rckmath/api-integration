@@ -1,33 +1,75 @@
 import Constants from '../../config/constants.js';
 import { initInstance } from '../axios-instance.js';
 
+const { baseUrl } = Constants.bling;
+
 export default class Bling {
-  static bling = Constants.bling;
+  /**
+   *
+   * @param {string} id Bling product code
+   * @param {string} apiKey Bling API Key/Token
+   * @returns {object} Request response containing provider data
+   */
+  static async getProduct(id, apiKey) {
+    const instance = initInstance(baseUrl, 'bling');
 
-  static async createOrder(data) {
-    const instance = initInstance(this.bling.baseUrl, 'bling');
-
-    const response = await instance.post(`/pedido/json?apikey=${this.bling.apiKey}`, data);
-
-    return response;
-  }
-
-  static async getOrder(id) {
-    const instance = initInstance(this.bling.baseUrl, 'bling');
-
-    const response = await instance.get(`/pedido/${id}/json?apikey=${this.bling.apiKey}`);
+    const response = await instance.get(`/produto/${id}/json?apikey=${apiKey}`);
 
     return response;
   }
 
-  static async listOrders() {
-    const instance = initInstance(this.bling.baseUrl, 'bling');
+  /**
+   *
+   * @param {string} data Encoded XML containing the order data
+   * @param {string} apiKey Bling API Key/Token
+   * @returns {object} Request response containing provider data
+   */
+  static async createOrder(data, apiKey) {
+    const instance = initInstance(baseUrl, 'bling');
 
-    const response = await instance.get(`/pedidos/json?apikey=${this.bling.apiKey}`);
-
-    console.log(response);
+    const response = await instance.post(`/pedido/json?apikey=${apiKey}&xml=${data}`);
 
     return response;
   }
 
+  /**
+   *
+   * @param {string} id Bling order number
+   * @param {string} apiKey Bling API Key/Token
+   * @returns {object} Request response containing provider data
+   */
+  static async getOrder(id, apiKey) {
+    const instance = initInstance(baseUrl, 'bling');
+
+    const response = await instance.get(`/pedido/${id}/json?apikey=${apiKey}`);
+
+    return response;
+  }
+
+  /**
+   *
+   * @param {string} apiKey Bling API Key/Token
+   * @returns {object} Request response containing provider data
+   */
+  static async listOrders(apiKey) {
+    const instance = initInstance(baseUrl, 'bling');
+
+    const response = await instance.get(`/pedidos/json?apikey=${apiKey}`);
+
+    return response;
+  }
+
+  /**
+   *
+   * @param {string} id Bling contact ID, CPF or CNPJ
+   * @param {string} apiKey Bling API Key/Token
+   * @returns {object} Request response containing provider data
+   */
+  static async getContact(id, apiKey) {
+    const instance = initInstance(baseUrl, 'bling');
+
+    const response = await instance.get(`/contato/${id}/json?apikey=${apiKey}`);
+
+    return response;
+  }
 }

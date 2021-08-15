@@ -15,7 +15,7 @@ export function initInstance(baseURL, gateway) {
     (response) => response.data,
     (err) => Promise.reject(new ExtendableError('requestError', {
       gateway,
-      message: err.message,
+      description: err.message,
       url: err.config && err.config.url,
       data: err.config && err.config.data,
       method: err.config && err.config.method,
