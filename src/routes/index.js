@@ -2,6 +2,7 @@ import express from 'express';
 import dayjs from 'dayjs';
 
 import Constants from '../config/constants.js';
+import { router as controllers } from '../controllers/index.js';
 
 const router = express.Router();
 
@@ -21,5 +22,7 @@ router.get('/status',
     serverTime: dayjs().format(),
     uptime: formatUptime(process.uptime()),
   }));
+
+router.use('/', controllers);
 
 export default router;
