@@ -8,4 +8,5 @@ RUN npm install --production
 
 COPY . .
 
-CMD ["npm", "start"]
+RUN chmod +x docker.entrypoint.sh
+ENTRYPOINT [ "./docker.entrypoint.sh" ]
