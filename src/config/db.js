@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
-const initializeDatabase = (Constants) => {
+const initializeDatabase = (Constants, isJob) => {
   const { db } = Constants;
+
+  const _prefix = isJob ? 'Job' : 'API';
 
   mongoose
     .connect(db.uri, {
@@ -12,9 +14,9 @@ const initializeDatabase = (Constants) => {
       useFindAndModify: false,
     });
 
-  mongoose.connection.on('error', () => console.error('Connection error: '));
-  mongoose.connection.once('open', () => console.log(`Connected with '${db.name}' database`));
-  mongoose.connection.on('disconnected', () => console.log('Database connection lost'));
+  mongoose.connection.on('error', () => console.error(`${_prefix} connection error: `));
+  mongoose.connection.once('open', () => console.log(`${_prefix} connected with '${db.name}' database`));
+  mongoose.connection.on('disconnected', () => console.log(`${_prefix} database connection lost`));
 };
 
 export default initializeDatabase;

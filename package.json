@@ -7,9 +7,12 @@
   "scripts": {
     "lint": "eslint --ext .js --ignore-path .gitignore .",
     "dev": "cp .env.development .env & nodemon -r dotenv/config app.js",
+    "dev:job": "cp .env.development .env & node -r dotenv/config app-job.js",
     "start": "cp .env.production .env & node -r dotenv/config app.js",
-    "docker": "docker build -t api-integration . & docker run -dp 3000:3000 --name pipebling api-integration",
+    "start:job": "cp .env.production .env & node -r dotenv/config app-job.js",
+    "docker": "npm run docker:build & npm run docker:stop & docker rm pipebling & docker run -dp 3000:3000 --name pipebling api-integration",
     "docker:stop": "docker stop pipebling",
+    "docker:build": "docker build -t api-integration .",
     "docker:restart": "npm run docker:stop & docker start pipebling"
   },
   "repository": {
@@ -33,6 +36,7 @@
     "mongodb": "^4.1.0",
     "mongoose": "^5.13.7",
     "morgan": "^1.10.0",
+    "node-schedule": "^2.0.0",
     "xmlbuilder": "^15.1.1"
   },
   "devDependencies": {
